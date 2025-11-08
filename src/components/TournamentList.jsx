@@ -1,49 +1,72 @@
 import React from 'react';
+import { Users, Clock, Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Trophy, Clock } from 'lucide-react';
 
 const tournaments = [
-  { id: 1, title: 'BGMI Squad Scrims', time: 'Starts in 25m', slots: '64/100', tag: 'Featured', color: 'from-emerald-500 to-teal-500' },
-  { id: 2, title: 'Valorant Aim Duel', time: 'Live Now', slots: '32/32', tag: 'Live', color: 'from-indigo-500 to-purple-500' },
-  { id: 3, title: 'Free Fire Clash', time: 'Today 8 PM', slots: '96/100', tag: 'Hot', color: 'from-pink-500 to-rose-500' },
+  {
+    id: 1,
+    title: 'BGMI Daily Scrims',
+    game: 'BGMI',
+    slots: '48/64',
+    time: 'Starts in 2h',
+    prize: '₹5,000',
+  },
+  {
+    id: 2,
+    title: 'Valorant Diamond Cup',
+    game: 'Valorant',
+    slots: '32/32',
+    time: 'Live now',
+    prize: '₹10,000',
+  },
+  {
+    id: 3,
+    title: 'CoD Mobile Rush',
+    game: 'CoD Mobile',
+    slots: '12/16',
+    time: 'Tomorrow 7 PM',
+    prize: '₹3,000',
+  },
 ];
 
-const TournamentCard = ({ item }) => (
-  <motion.div
-    whileHover={{ y: -4 }}
-    className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur shadow-sm"
-  >
-    <div className="flex items-center justify-between">
-      <span className={`text-[10px] uppercase tracking-wider font-semibold bg-gradient-to-r ${item.color} text-white px-2 py-1 rounded`}>{item.tag}</span>
-      <div className="flex items-center gap-1 text-white/80 text-sm"><Clock className="h-4 w-4" />{item.time}</div>
-    </div>
-    <div className="mt-3 flex items-start gap-3">
-      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-white/10 to-white/5">
-        <Trophy className="h-6 w-6 text-yellow-300" />
-      </div>
-      <div className="flex-1">
-        <h3 className="text-white font-semibold text-base">{item.title}</h3>
-        <p className="text-white/70 text-sm">Slots: {item.slots}</p>
-      </div>
-      <button className="rounded-md bg-emerald-500 px-3 py-2 text-sm font-semibold text-white">Join</button>
-    </div>
-  </motion.div>
-);
-
-const TournamentList = () => {
+export default function TournamentList() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-8">
-      <div className="flex items-center justify-between">
-        <h2 className="text-lg sm:text-xl font-bold text-white">Trending Tournaments</h2>
-        <button className="text-sm text-emerald-400 hover:text-emerald-300">View all</button>
-      </div>
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {tournaments.map((t) => (
-          <TournamentCard key={t.id} item={t} />
-        ))}
+    <section id="tournaments" className="relative w-full bg-[#07090A] text-white py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold">Trending tournaments</h2>
+            <p className="text-white/70 mt-1 text-sm">Join matches hosted by trusted organizers across India.</p>
+          </div>
+          <a href="#" className="hidden sm:inline-flex text-sm text-emerald-400 hover:text-emerald-300 font-medium">View all</a>
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tournaments.map((t, idx) => (
+            <motion.article
+              key={t.id}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              className="rounded-xl border border-white/10 bg-white/5 backdrop-blur p-5 hover:border-white/20 transition"
+            >
+              <header className="flex items-center justify-between">
+                <span className="inline-flex items-center rounded-full bg-emerald-500/15 text-emerald-300 text-xs px-2.5 py-1 font-medium">{t.game}</span>
+                <span className="inline-flex items-center gap-1 text-xs text-white/70"><Trophy className="w-4 h-4 text-amber-300" /> {t.prize}</span>
+              </header>
+              <h3 className="mt-3 text-lg font-semibold">{t.title}</h3>
+              <div className="mt-3 grid grid-cols-3 gap-2 text-xs text-white/70">
+                <div className="inline-flex items-center gap-1.5"><Users className="w-4 h-4" /> {t.slots}</div>
+                <div className="inline-flex items-center gap-1.5"><Clock className="w-4 h-4" /> {t.time}</div>
+                <div className="text-right">
+                  <button className="inline-flex items-center justify-center rounded-md bg-emerald-500 text-black font-semibold px-3 py-1.5 text-xs hover:brightness-110">Join</button>
+                </div>
+              </div>
+            </motion.article>
+          ))}
+        </div>
       </div>
     </section>
   );
-};
-
-export default TournamentList;
+}

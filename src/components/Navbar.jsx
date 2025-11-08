@@ -1,26 +1,25 @@
 import React from 'react';
-import { Rocket, ShoppingBag, User, Bell } from 'lucide-react';
+import { Rocket, User } from 'lucide-react';
 
-const Navbar = () => {
+export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-black/40 backdrop-blur supports-[backdrop-filter]:bg-black/40">
-      <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-white font-semibold">
-          <Rocket className="h-5 w-5 text-emerald-400" /> GK Arena
-        </div>
-        <nav className="hidden sm:flex items-center gap-6 text-sm text-white/80">
-          <a className="hover:text-white" href="#tournaments">Tournaments</a>
-          <a className="hover:text-white" href="#marketplace">Marketplace</a>
-          <a className="hover:text-white" href="#leaderboard">Leaderboards</a>
-        </nav>
+    <header className="w-full sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/30 bg-black/20 border-b border-white/10">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+        <a href="#" className="flex items-center gap-2 text-white font-semibold tracking-tight">
+          <span className="inline-flex items-center justify-center rounded-md bg-emerald-500/20 p-1.5">
+            <Rocket className="w-5 h-5 text-emerald-400" />
+          </span>
+          <span className="text-sm sm:text-base">eSports India</span>
+        </a>
         <div className="flex items-center gap-3">
-          <button aria-label="notifications" className="rounded-lg border border-white/10 bg-white/5 p-2 text-white"><Bell className="h-5 w-5" /></button>
-          <button aria-label="cart" className="rounded-lg border border-white/10 bg-white/5 p-2 text-white"><ShoppingBag className="h-5 w-5" /></button>
-          <button className="rounded-lg bg-emerald-500 px-3 py-2 text-sm font-semibold text-white"><User className="h-4 w-4 inline mr-1"/>Sign in</button>
+          <a href="#tournaments" className="hidden sm:inline-flex text-sm text-white/80 hover:text-white transition">Tournaments</a>
+          <a href="#market" className="hidden sm:inline-flex text-sm text-white/80 hover:text-white transition">Market</a>
+          <button className="inline-flex items-center gap-2 text-sm font-medium text-white/90 hover:text-white bg-white/10 hover:bg-white/15 rounded-md px-3 py-1.5 transition">
+            <User className="w-4 h-4" />
+            Sign in
+          </button>
         </div>
-      </div>
+      </nav>
     </header>
   );
-};
-
-export default Navbar;
+}
